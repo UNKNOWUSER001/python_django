@@ -1,0 +1,22 @@
+{% extends 'web_general/components/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block site_title %}Goods{% endblock %}
+{% block content %}
+<section class="content-wrapper">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title text-center">ขอบคุณสำหรับการลงทะเบียน</h1>
+                        <p class="text-center">
+                            <a class="btn btn-success" href="{% url 'signIn' %}">เข้าสู่ระบบ</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

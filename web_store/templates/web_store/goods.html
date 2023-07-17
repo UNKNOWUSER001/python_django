@@ -1,0 +1,25 @@
+{% extends 'web_general/components/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block site_title %}Goods{% endblock %}
+{% block content %}
+<div class="content-wrapper">
+<section class="bodycontainer">
+    <div class="header">
+    </div>
+    <div class="products">
+        <div class="product">
+            <h1>{{ product.name }}</h1>
+            <img class="image" src="{{ product.image.url }}">
+            <p>{{ product.description }}</p>
+            <span>{{ product.price|intcomma }} บาท</span>
+            {% if product.stock >= 0 %}
+                <a class="btn btn-primary bay now" href="{% url 'addCart' product.id %}">เพิ่มลงตะกร้า</a>
+            {% else %}
+                <a class="btn btn-primary bay now">สินค้าหมด</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+</div>
+{% endblock %}

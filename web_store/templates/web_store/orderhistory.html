@@ -1,0 +1,66 @@
+{% extends 'web_general/components/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block site_title %}Orderhistory{% endblock %}
+{% block content %}
+<section>
+  <div class="content-wrapper">
+    <section class="vh-100" style="background-color: #e9e9e9b5;">
+        {% if not orders %}
+           <div class="alert alert-danger" role="alert">
+            <p><span class="h2">ไม่มีประวัติการซื้อ</span></p>
+          </div>
+        {% else %}
+           <div>
+             <h2 align="center">ประวัติการซื้อสินค้า</h2>
+             <ul>
+              {% for item in orders %}
+              <div class="card mb-4">
+                <div class="card-body p-4">
+      
+                  <div class="row align-items-center">
+                    <div class="col-md-2">
+                      <div>
+                        <p class="small text-muted mb-4 pb-2">Name</p>
+                        <p class="lead fw-normal mb-0">{{item.name}}</p>
+                      </div>
+                    </div>
+                    <div class="col-md-2 d-flex justify-content-center">
+                      <div>
+                        <p class="small text-muted mb-4 pb-2">Date</p>
+                        <p class="lead fw-normal mb-0">{{item.create| date:"d M Y"}}</p>
+                      </div>
+                    </div>
+                    <div class="col-md-2 d-flex justify-content-center">
+                    </div>
+                    <div class="col-md-2 d-flex justify-content-center">
+                      <div>
+                        <p class="small text-muted mb-4 pb-2">Total</p>
+                        <p class="lead fw-normal mb-0">{{item.total|intcomma}}</p>
+                      </div>
+                    </div>
+                    <div class="col-md-2 d-flex justify-content-center">
+                      <div>
+                        <p class="small text-muted mb-4 pb-2">ID</p>
+                        <p class="lead fw-normal mb-0">{{item.id}}</p>
+                      </div>
+                    </div>
+                    <div class="col-md-2 d-flex justify-content-center">
+                      <div>
+                        <p class="small text-muted mb-4 pb-2">Product</p>
+                        <a href="{% url 'orderdetail' item.id %}" class="btn btn-success">Detail</a>
+                        
+                      </div>
+                    </div>
+                  </div>
+      
+                </div>
+              </div>
+              {%endfor%}
+             </ul>
+           </div>
+        {% endif %}
+      </section>
+  </div>
+</section>
+{% endblock %}

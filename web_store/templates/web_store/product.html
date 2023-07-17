@@ -1,0 +1,40 @@
+{% extends 'web_general/components/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block site_title %}Product{% endblock %}
+{% block content %}
+<section class="content-wrapper">
+    <div class="bodycontainer">
+        <div class="header">
+            <h1>สินค้าทั้งหมด</h1>
+        </div>
+        <div class="products">
+            <!-- loop ข้อมูลจาก products มาใส่ -->
+            {% for product in products %}
+            <div class="product">
+                <h1><a class="star" href="{{product.get_url}}">{{ product.name }}</a></h1>
+                <img class="image" src="{{ product.image.url }}">
+                <p>{{ product.description | slice:":20"}}</p>
+                <span>{{ product.price|intcomma }} บาท</span>
+                {% if product.stock > 0 %}
+                    <a class="button btn bay now" href="{% url 'addCart' product.id %}">เพิ่มลงตะกร้า</a>
+                {% else %}
+                    <a class="button btn btn-danger bay now">สินค้าหมด</a>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <nav aria-label="pageination">
+                {% if products.paginator.num_pages > 1 %}
+                <ul class="pagination">
+                    {% for page_number in products.paginator.page_range %}
+                        <li class="page-item {% if products.number == page_number %}active{% endif %}">
+                            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </nav>        
+        </div>
+    </div>
+</section>
+{% endblock content %}
